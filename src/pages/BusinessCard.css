@@ -1,0 +1,149 @@
+.business-card-page {
+  padding-bottom: 100px;
+  min-height: 100vh;
+}
+
+.business-card-page h1 {
+  padding: 24px 20px 16px;
+  font-size: 28px;
+  color: var(--text-primary);
+}
+
+.card-form-section {
+  padding: 0 20px;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 14px;
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.card-description,
+.card-warning {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 16px;
+}
+
+.card-warning {
+  color: var(--error);
+  padding: 12px;
+  background: rgba(234, 67, 53, 0.1);
+  border-radius: 4px;
+}
+
+.qr-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 24px;
+}
+
+.qr-code-container {
+  background: white;
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 16px;
+  box-shadow: var(--shadow);
+}
+
+.qr-instruction {
+  font-size: 14px;
+  color: var(--text-secondary);
+  text-align: center;
+  margin-bottom: 16px;
+}
+
+.card-preview {
+  margin-top: 24px;
+}
+
+.card-preview h2 {
+  margin-bottom: 16px;
+}
+
+.preview-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
+  padding: 24px;
+  color: white;
+  box-shadow: var(--shadow-hover);
+}
+
+.preview-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.preview-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid white;
+  object-fit: cover;
+}
+
+.preview-name-section h3 {
+  font-size: 24px;
+  margin-bottom: 4px;
+}
+
+.preview-title {
+  font-size: 16px;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+
+.preview-company {
+  font-size: 14px;
+  opacity: 0.8;
+}
+
+.preview-bio {
+  margin-bottom: 20px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-bio p {
+  line-height: 1.6;
+  opacity: 0.95;
+}
+
+.preview-contact {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.preview-contact-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.preview-contact-item span {
+  font-size: 20px;
+}
+
+.preview-contact-item a {
+  color: white;
+  text-decoration: none;
+  word-break: break-all;
+}
+
+.preview-contact-item a:hover {
+  text-decoration: underline;
+}
+
