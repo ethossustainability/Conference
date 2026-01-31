@@ -9,11 +9,9 @@ function Navigation() {
 
   const navItems = [
     { path: '/', label: 'Home', icon: '🏠' },
-    { path: '/card', label: 'My Card', icon: '👤' },
-    { path: '/scan', label: 'Scan', icon: '📷' },
-    { path: '/cards', label: 'Cards', icon: '💼' },
-    { path: '/schedule', label: 'Schedule', icon: '📅' },
-    { path: '/info', label: 'Info', icon: 'ℹ️' },
+    { path: '/research', label: 'Research', icon: '🔬' },
+    { path: '/booths', label: 'Booths', icon: '🏢' },
+    { path: '/sharktank', label: 'Shark Tank', icon: '🦈' },
   ];
 
   return (
@@ -22,8 +20,8 @@ function Navigation() {
         <div className="nav-user">
           {user && (
             <>
-              <img 
-                src={user.picture || '/default-avatar.png'} 
+              <img
+                src={user.picture || '/default-avatar.png'}
                 alt={user.name}
                 className="nav-avatar"
               />

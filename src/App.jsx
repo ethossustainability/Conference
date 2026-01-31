@@ -8,6 +8,9 @@ import ScanCard from './pages/ScanCard';
 import MyCards from './pages/MyCards';
 import Schedule from './pages/Schedule';
 import Info from './pages/Info';
+import ResearchRoom from './pages/ResearchRoom';
+import BoothRoom from './pages/BoothRoom';
+import SharkTankRoom from './pages/SharkTankRoom';
 import Navigation from './components/Navigation';
 
 function ProtectedRoute({ children }) {
@@ -73,6 +76,30 @@ function AppRoutes() {
         element={
           <ProtectedRoute>
             <Info />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/research"
+        element={
+          <ProtectedRoute>
+            <ResearchRoom />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/booths"
+        element={
+          <ProtectedRoute>
+            <BoothRoom />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/sharktank"
+        element={
+          <ProtectedRoute>
+            <SharkTankRoom />
           </ProtectedRoute>
         }
       />
