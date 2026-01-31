@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 import './Room.css';
 
 function SharkTankRoom() {
@@ -70,6 +71,7 @@ function SharkTankRoom() {
                     <p>The top 10 projects will be seen by investors for potential initial investment.</p>
                 </section>
             </div>
+            <Navigation />
         </div>
     );
 }

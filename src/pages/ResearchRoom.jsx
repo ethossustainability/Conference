@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 import './Room.css';
 
 function ResearchRoom() {
@@ -39,6 +40,7 @@ function ResearchRoom() {
                     ))}
                 </div>
             </div>
+            <Navigation />
         </div>
     );
 }

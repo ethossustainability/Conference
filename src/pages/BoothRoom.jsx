@@ -1,5 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import Navigation from '../components/Navigation';
 import './Room.css';
 
 function BoothRoom() {
@@ -36,11 +37,12 @@ function BoothRoom() {
                                 <span className="label">Open Roles:</span>
                                 <span className="value">{company.opportunity}</span>
                             </div>
-                            <button className="btn-secondary">Visit Booth</button>
+                            <button className="btn-primary">Visit Booth</button>
                         </div>
                     ))}
                 </div>
             </div>
+            <Navigation />
         </div>
     );
 }
