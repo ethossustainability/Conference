@@ -3,24 +3,27 @@
   "version": "1.0.0",
   "description": "Progressive Web App for conference networking",
   "private": true,
+  "homepage": "https://ethossustainability.github.io/Conference",
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist",
     "dev": "vite",
     "build": "vite build",
     "preview": "vite preview"
   },
   "dependencies": {
+    "html5-qrcode": "^2.3.8",
+    "qrcode.react": "^3.1.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.20.0",
-    "qrcode.react": "^3.1.0",
-    "html5-qrcode": "^2.3.8"
+    "react-router-dom": "^6.20.0"
   },
   "devDependencies": {
     "@types/react": "^18.2.43",
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
+    "gh-pages": "^6.3.0",
     "vite": "^5.0.8",
     "vite-plugin-pwa": "^0.17.4"
   }
 }
-
