@@ -5,17 +5,17 @@
 }
 
 :root {
-  --primary-color: #1a73e8;
-  --primary-dark: #1557b0;
-  --secondary-color: #34a853;
-  --background: #f5f5f5;
-  --surface: #ffffff;
-  --text-primary: #202124;
-  --text-secondary: #5f6368;
-  --border: #dadce0;
-  --error: #ea4335;
-  --shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-  --shadow-hover: 0 3px 6px rgba(0, 0, 0, 0.16), 0 3px 6px rgba(0, 0, 0, 0.23);
+  --primary-color: #FCBD9D;
+  --primary-dark: #413429;
+  --secondary-color: #FFE2D6;
+  --background: #FFFBF4;
+  --surface: #D4CCC4;
+  --text-primary: #514033;
+  --text-secondary: #7D6F63;
+  --border: #A89E94;
+  --error: #D2691E;
+  --shadow: 0 1px 3px rgba(65, 52, 41, 0.12), 0 1px 2px rgba(65, 52, 41, 0.24);
+  --shadow-hover: 0 3px 6px rgba(65, 52, 41, 0.16), 0 3px 6px rgba(65, 52, 41, 0.23);
 }
 
 body {

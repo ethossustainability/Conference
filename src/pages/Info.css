@@ -124,7 +124,7 @@
   padding: 6px 12px;
   font-size: 12px;
   background: var(--primary-color);
-  color: white;
+  color: var(--text-primary);
   border: none;
   border-radius: 4px;
   cursor: pointer;
@@ -134,6 +134,7 @@
 
 .copy-button:hover {
   background: var(--primary-dark);
+  color: white;
 }
 
 .contact-info {
@@ -155,7 +156,7 @@
 }
 
 .contact-link:hover {
-  background: rgba(26, 115, 232, 0.1);
+  background: rgba(252, 189, 157, 0.2);
   color: var(--primary-color);
 }
 
@@ -204,4 +205,3 @@
   font-weight: bold;
   font-size: 20px;
 }
-

@@ -80,7 +80,7 @@
 
 .nav-link.active {
   color: var(--primary-color);
-  background: rgba(26, 115, 232, 0.1);
+  background: rgba(252, 189, 157, 0.2);
 }
 
 .nav-icon {
@@ -102,18 +102,17 @@
   .nav-username {
     display: none;
   }
-  
+
   .nav-links {
     gap: 2px;
   }
-  
+
   .nav-link {
     min-width: 50px;
     padding: 8px;
   }
-  
+
   .nav-label {
     font-size: 10px;
   }
 }
-

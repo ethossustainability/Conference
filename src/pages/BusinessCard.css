@@ -70,10 +70,10 @@
 }
 
 .preview-card {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, #FCBD9D 0%, #7D6F63 100%);
   border-radius: 12px;
   padding: 24px;
-  color: white;
+  color: var(--text-primary);
   box-shadow: var(--shadow-hover);
 }
 
@@ -88,7 +88,7 @@
   width: 80px;
   height: 80px;
   border-radius: 50%;
-  border: 3px solid white;
+  border: 3px solid var(--background);
   object-fit: cover;
 }
 
@@ -111,7 +111,7 @@
 .preview-bio {
   margin-bottom: 20px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(81, 64, 51, 0.2);
 }
 
 .preview-bio p {
@@ -124,7 +124,7 @@
   flex-direction: column;
   gap: 12px;
   padding-top: 20px;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  border-top: 1px solid rgba(81, 64, 51, 0.2);
 }
 
 .preview-contact-item {
@@ -138,7 +138,7 @@
 }
 
 .preview-contact-item a {
-  color: white;
+  color: var(--text-primary);
   text-decoration: none;
   word-break: break-all;
 }
@@ -146,4 +146,3 @@
 .preview-contact-item a:hover {
   text-decoration: underline;
 }
-

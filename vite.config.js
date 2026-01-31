@@ -13,7 +13,7 @@ export default defineConfig({
         name: 'Conference Networking App',
         short_name: 'ConfNet',
         description: 'Network at conferences with QR code business cards',
-        theme_color: '#1a73e8',
+        theme_color: '#FCBD9D',
         background_color: '#ffffff',
         display: 'standalone',
         orientation: 'portrait',
