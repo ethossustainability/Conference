@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { Html5QrcodeScanner } from 'html5-qrcode';
 import { useAuth } from '../contexts/AuthContext';
 import Navigation from '../components/Navigation';
@@ -93,9 +94,9 @@ function ScanCard() {
 
   const saveCard = (cardData) => {
     const savedCards = JSON.parse(localStorage.getItem('collected_cards') || '[]');
-    
+
     // Check if card already exists
-    const exists = savedCards.some(card => 
+    const exists = savedCards.some(card =>
       card.email === cardData.email && card.userId === cardData.userId
     );
 
@@ -113,8 +114,14 @@ function ScanCard() {
 
   return (
     <div className="scan-card-page">
+      <div className="page-header">
+        <Link to="/" className="back-button">← Back to Home</Link>
+        <div className="container">
+          <h1>Scan QR Code</h1>
+        </div>
+      </div>
+
       <div className="container">
-        <h1>Scan QR Code</h1>
         <p className="page-description">
           Scan someone's QR code to instantly receive their business card
         </p>
@@ -164,7 +171,7 @@ function ScanCard() {
                 <span className="success-icon">✓</span>
                 <h2>Card Saved Successfully!</h2>
               </div>
-              
+
               <div className="scanned-card-preview">
                 <div className="preview-header">
                   {scannedData.picture && (

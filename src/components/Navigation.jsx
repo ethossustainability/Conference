@@ -11,7 +11,7 @@ function Navigation() {
     { path: '/', label: 'Home', icon: '🏠' },
     { path: '/research', label: 'Research', icon: '🔬' },
     { path: '/booths', label: 'Booths', icon: '🏢' },
-    { path: '/sharktank', label: 'Shark Tank', icon: '🦈' },
+    { path: '/sharktank', label: 'Pitch', icon: '🦈' },
   ];
 
   return (

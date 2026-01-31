@@ -1,30 +1,37 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import './Info.css';
 
 function Info() {
   const conferenceInfo = {
-    name: 'Tech Innovation Conference 2024',
+    name: 'Sustainable Futures Conference',
     date: 'March 15, 2024',
-    location: 'Convention Center, San Francisco',
+    location: 'Discovery Hall, UNT',
     description: 'Join us for an exciting day of networking, learning, and innovation. Connect with industry leaders, discover the latest technologies, and expand your professional network.',
     organizers: 'Conference Organizing Committee',
     contact: {
-      email: 'info@conference2024.com',
+      email: 'info@conference.com',
       phone: '+1 (555) 123-4567',
-      website: 'https://conference2024.com',
+      website: 'https://conference.com',
     },
     wifi: {
-      network: 'Conference2024',
+      network: 'Conference_Guest',
       password: 'Innovate2024!',
     },
-    hashtag: '#TechConf2024',
+    hashtag: '#SustainableTech',
   };
 
   return (
     <div className="info-page">
+      <div className="page-header">
+        <Link to="/" className="back-button">← Back to Home</Link>
+        <div className="container">
+          <h1>Conference Information</h1>
+        </div>
+      </div>
+
       <div className="container">
-        <h1>Conference Information</h1>
 
         <div className="info-content">
           <div className="info-card">

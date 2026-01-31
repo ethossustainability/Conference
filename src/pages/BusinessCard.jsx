@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { QRCodeSVG } from 'qrcode.react';
 import { useAuth } from '../contexts/AuthContext';
 import Navigation from '../components/Navigation';
@@ -59,9 +60,15 @@ function BusinessCard() {
 
   return (
     <div className="business-card-page">
+      <div className="page-header">
+        <Link to="/" className="back-button">← Back to Home</Link>
+        <div className="container">
+          <h1>My Business Card</h1>
+        </div>
+      </div>
+
       <div className="container">
-        <h1>My Business Card</h1>
-        
+
         <div className="card-form-section">
           <div className="card">
             <h2>Card Information</h2>
@@ -165,7 +172,7 @@ function BusinessCard() {
             <p className="card-description">
               Save your card to generate a QR code that others can scan to get your contact information.
             </p>
-            
+
             {cardData.name && cardData.email ? (
               <>
                 <button

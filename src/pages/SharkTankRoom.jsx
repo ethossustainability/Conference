@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import './Room.css';
 
 function SharkTankRoom() {
     const [votedId, setVotedId] = useState(null);
 
     const startups = [
-        { id: 1, name: "ReGlow Fashion", founder: "Sarah J.", pitch: "Upcycling textile waste into high-end luxury streetwear.", votes: 142 },
-        { id: 2, name: "AquaNode", founder: "Mark T.", pitch: "Decentralized smart sensors for real-time ocean health monitoring.", votes: 98 },
-        { id: 3, name: "FruitSave AI", founder: "Elena R.", pitch: "Predictive AI tools for farmers to reduce post-harvest food waste.", votes: 215 },
-        { id: 4, name: "UrbanLeaf", founder: "James C.", pitch: "Automated indoor vertical farming for dense urban centers.", votes: 167 },
+        { id: 1, name: "Project A", founder: "Presenter A", pitch: "Pitch description goes here.", votes: 0 },
+        { id: 2, name: "Project B", founder: "Presenter B", pitch: "Pitch description goes here.", votes: 0 },
+        { id: 3, name: "Project C", founder: "Presenter C", pitch: "Pitch description goes here.", votes: 0 },
     ];
 
     const handleVote = (id) => {
@@ -22,11 +22,8 @@ function SharkTankRoom() {
     return (
         <div className="room-page">
             <div className="room-header">
-                <h1>Shark Tank Room</h1>
-                <div className="lead-badge">
-                    <span className="lead-label">Room Lead:</span>
-                    <span className="lead-name">Christiaan</span>
-                </div>
+                <Link to="/" className="back-button">← Back to Home</Link>
+                <h1>Pitch Room</h1>
             </div>
 
             <div className="room-content">
@@ -44,7 +41,7 @@ function SharkTankRoom() {
 
                 <section className="room-intro">
                     <h2>Phase 1: Vote for the Best Projects</h2>
-                    <p>Vote for the youth-founded companies you think are the most interesting. The top ten will move on to the next phase.</p>
+                    <p>People can vote via the app, and the app will aggregate the data for the top ten projects.</p>
                 </section>
 
                 <div className="startup-list">
@@ -70,7 +67,7 @@ function SharkTankRoom() {
 
                 <section className="phase-details mt-3">
                     <h3>Phase 2 Preview</h3>
-                    <p>The top 10 projects will be seen by investors for potential initial investments ranging from $1k to $100k.</p>
+                    <p>The top 10 projects will be seen by investors for potential initial investment.</p>
                 </section>
             </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import './Schedule.css';
 
@@ -88,8 +89,14 @@ function Schedule() {
 
   return (
     <div className="schedule-page">
+      <div className="page-header">
+        <Link to="/" className="back-button">← Back to Home</Link>
+        <div className="container">
+          <h1>Conference Schedule</h1>
+        </div>
+      </div>
+
       <div className="container">
-        <h1>Conference Schedule</h1>
         <p className="page-description">
           View all events and sessions happening at the conference
         </p>

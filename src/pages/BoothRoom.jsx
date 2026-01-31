@@ -1,32 +1,28 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Room.css';
 
 function BoothRoom() {
     const companies = [
-        { id: 1, name: "EcoStream Technologies", industry: "Water Conservation", opportunity: "Internships & Junior Dev", location: "Booth A1" },
-        { id: 2, name: "GreenPulse Energy", industry: "Renewable Solar", opportunity: "Full-time Engineering", location: "Booth B4" },
-        { id: 3, name: "Terra Cycle Solutions", industry: "Waste Management", opportunity: "Logistics Intern", location: "Booth C2" },
-        { id: 4, name: "BioGrowth Labs", industry: "Sustainable Agriculture", opportunity: "Research Assistant", location: "Booth A5" },
-        { id: 5, name: "CleanSky Systems", industry: "Air Purification", opportunity: "Sales & Marketing", location: "Booth D1" },
+        { id: 1, name: "Company A", industry: "Sector A", opportunity: "Role A", location: "Booth 1" },
+        { id: 2, name: "Company B", industry: "Sector B", opportunity: "Role B", location: "Booth 2" },
+        { id: 3, name: "Company C", industry: "Sector C", opportunity: "Role C", location: "Booth 3" },
     ];
 
     return (
         <div className="room-page">
             <div className="room-header">
+                <Link to="/" className="back-button">← Back to Home</Link>
                 <h1>Sustainable Company Booths</h1>
-                <div className="lead-badge">
-                    <span className="lead-label">Room Lead:</span>
-                    <span className="lead-name">Juhi</span>
-                </div>
             </div>
 
             <div className="room-content">
                 <section className="room-intro">
                     <h2>Hallway of Opportunities</h2>
-                    <p>Connect with companies leading the way in sustainability. These booths are looking for fresh talent for internships and jobs.</p>
+                    <p>Connect with companies leading the way in sustainability. These booths are looking for fresh talent.</p>
                     <div className="booth-notice">
                         <span className="icon">💼</span>
-                        <p>50+ companies registered. Spot rentals supporting our sustainability mission.</p>
+                        <p>Companies are looking for individuals for internships and jobs.</p>
                     </div>
                 </section>
 

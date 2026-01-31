@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import './MyCards.css';
 
@@ -118,8 +119,14 @@ function MyCards() {
 
   return (
     <div className="my-cards-page">
+      <div className="page-header">
+        <Link to="/" className="back-button">← Back to Home</Link>
+        <div className="container">
+          <h1>Collected Cards</h1>
+        </div>
+      </div>
+
       <div className="container">
-        <h1>Collected Cards</h1>
         <p className="page-description">
           View and manage all the business cards you've collected
         </p>
@@ -148,9 +155,9 @@ function MyCards() {
               {filter ? 'No cards match your search.' : 'Start scanning QR codes to collect business cards!'}
             </p>
             {!filter && (
-              <a href="/scan" className="btn-primary">
+              <Link to="/scan" className="btn-primary">
                 Scan a Card
-              </a>
+              </Link>
             )}
           </div>
         ) : (
