@@ -5,14 +5,19 @@ import './Navigation.css';
 
 function Navigation() {
   const location = useLocation();
-  const { user, logout } = useAuth();
+  const { user, logout, isAdmin } = useAuth();
 
   const navItems = [
     { path: '/', label: 'Home', icon: '🏠' },
     { path: '/research', label: 'Research', icon: '🔬' },
     { path: '/booths', label: 'Booths', icon: '🏢' },
     { path: '/sharktank', label: 'Pitch', icon: '🦈' },
+    { path: '/auditorium', label: 'Auditorium', icon: '🎤' },
   ];
+
+  if (isAdmin) {
+    navItems.push({ path: '/admin', label: 'Admin', icon: '⚙️' });
+  }
 
   return (
     <nav className="navigation">

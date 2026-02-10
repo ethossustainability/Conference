@@ -96,6 +96,14 @@
   padding: 8px 16px;
   font-size: 12px;
   flex-shrink: 0;
+  background: var(--primary-dark);
+  color: white;
+  border: none;
+}
+
+.nav-logout:hover {
+  background-color: #2c231b;
+  opacity: 0.9;
 }
 
 @media (max-width: 640px) {

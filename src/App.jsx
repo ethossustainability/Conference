@@ -11,6 +11,8 @@ import Info from './pages/Info';
 import ResearchRoom from './pages/ResearchRoom';
 import BoothRoom from './pages/BoothRoom';
 import SharkTankRoom from './pages/SharkTankRoom';
+import Auditorium from './pages/Auditorium';
+import Admin from './pages/Admin';
 import Navigation from './components/Navigation';
 
 function ProtectedRoute({ children }) {
@@ -22,6 +24,20 @@ function ProtectedRoute({ children }) {
 
   if (!user) {
     return <Navigate to="/login" replace />;
+  }
+
+  return children;
+}
+
+function AdminRoute({ children }) {
+  const { user, isAdmin, loading } = useAuth();
+
+  if (loading) {
+    return <div className="loading">Loading...</div>;
+  }
+
+  if (!user || !isAdmin) {
+    return <Navigate to="/" replace />;
   }
 
   return children;
@@ -96,11 +112,27 @@ function AppRoutes() {
         }
       />
       <Route
+        path="/auditorium"
+        element={
+          <ProtectedRoute>
+            <Auditorium />
+          </ProtectedRoute>
+        }
+      />
+      <Route
         path="/sharktank"
         element={
           <ProtectedRoute>
             <SharkTankRoom />
           </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin"
+        element={
+          <AdminRoute>
+            <Admin />
+          </AdminRoute>
         }
       />
     </Routes>

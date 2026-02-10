@@ -4,27 +4,51 @@ import Navigation from '../components/Navigation';
 import './Room.css';
 
 function SharkTankRoom() {
-    const [votedId, setVotedId] = useState(null);
+    const [searchTerm, setSearchTerm] = useState('');
+    const [ratings, setRatings] = useState({});
 
+    // Placeholder startups
     const startups = [
-        { id: 1, name: "Project A", founder: "Presenter A", pitch: "Pitch description goes here.", votes: 0 },
-        { id: 2, name: "Project B", founder: "Presenter B", pitch: "Pitch description goes here.", votes: 0 },
-        { id: 3, name: "Project C", founder: "Presenter C", pitch: "Pitch description goes here.", votes: 0 },
+        { id: 1, name: "Project Name 1", founder: "Founder Name 1", pitch: "Brief description of the project and its sustainability impact.", url: "#" },
+        { id: 2, name: "Project Name 2", founder: "Founder Name 2", pitch: "Brief description of the project and its sustainability impact.", url: "#" },
+        { id: 3, name: "Project Name 3", founder: "Founder Name 3", pitch: "Brief description of the project and its sustainability impact.", url: "#" },
+        { id: 4, name: "Project Name 4", founder: "Founder Name 4", pitch: "Brief description of the project and its sustainability impact.", url: "#" },
     ];
 
-    const handleVote = (id) => {
-        if (votedId === id) {
-            setVotedId(null);
-        } else {
-            setVotedId(id);
-        }
+    const filteredStartups = startups.filter(startup =>
+        startup.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        startup.founder.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        startup.pitch.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+
+    const handleRatingChange = (startupId, question, value) => {
+        setRatings(prev => ({
+            ...prev,
+            [startupId]: {
+                ...prev[startupId],
+                [question]: value
+            }
+        }));
     };
+
+    const submitRating = (startupId) => {
+        // Here you would typically send the data to a backend
+        console.log(`Submitted rating for ${startupId}:`, ratings[startupId]);
+        alert('Thank you for your feedback!');
+    };
+
+    const ratingQuestions = [
+        { key: 'sustainable', label: 'How sustainable was this company?' },
+        { key: 'impactful', label: 'How impactful is this company?' },
+        { key: 'feasible', label: 'How feasible/viable is this company to implement?' },
+        { key: 'overall', label: 'How did you like it overall?' },
+    ];
 
     return (
         <div className="room-page">
             <div className="room-header">
                 <Link to="/" className="back-button">← Back to Home</Link>
-                <h1>Pitch Room</h1>
+                <h1>Pitch Room (Shark Tank)</h1>
             </div>
 
             <div className="room-content">
@@ -33,37 +57,56 @@ function SharkTankRoom() {
                         <span className="phase-num">1</span>
                         <span className="phase-text">Community Vote</span>
                     </div>
-                    <div className="phase-line"></div>
-                    <div className="phase">
-                        <span className="phase-num">2</span>
-                        <span className="phase-text">Pitch to Investors</span>
-                    </div>
                 </section>
 
                 <section className="room-intro">
-                    <h2>Phase 1: Vote for the Best Projects</h2>
-                    <p>People can vote via the app, and the app will aggregate the data for the top ten projects.</p>
+                    <h2>Vote & Rate Projects</h2>
+                    <p>Search for projects and rate them on key metrics.</p>
                 </section>
 
+                <div className="search-bar-container">
+                    <input
+                        type="text"
+                        placeholder="Search projects..."
+                        value={searchTerm}
+                        onChange={(e) => setSearchTerm(e.target.value)}
+                        className="search-input"
+                    />
+                </div>
+
                 <div className="startup-list">
-                    {startups.map(startup => (
-                        <div key={startup.id} className={`startup-card ${votedId === startup.id ? 'voted' : ''}`}>
-                            <div className="startup-info">
-                                <h3>{startup.name}</h3>
-                                <p className="founder">Founded by {startup.founder}</p>
-                                <p className="pitch">{startup.pitch}</p>
+                    {filteredStartups.map(startup => (
+                        <div key={startup.id} className="startup-card-expanded">
+                            <div className="startup-header">
+                                <div className="startup-info">
+                                    <h3>{startup.name}</h3>
+                                    <p className="founder">Founded by {startup.founder}</p>
+                                    <p className="pitch">{startup.pitch}</p>
+                                </div>
                             </div>
-                            <div className="vote-section">
-                                <span className="vote-count">{startup.votes + (votedId === startup.id ? 1 : 0)} votes</span>
-                                <button
-                                    className={votedId === startup.id ? 'btn-danger' : 'btn-primary'}
-                                    onClick={() => handleVote(startup.id)}
-                                >
-                                    {votedId === startup.id ? 'Remove Vote' : 'Vote Now'}
-                                </button>
+
+                            <div className="rating-section">
+                                <h4>Rate this Project</h4>
+                                {ratingQuestions.map(({ key, label }) => (
+                                    <div key={key} className="rating-question">
+                                        <label>{label} (1-10)</label>
+                                        <div className="rating-input">
+                                            <input
+                                                type="range"
+                                                min="1"
+                                                max="10"
+                                                value={ratings[startup.id]?.[key] || 5}
+                                                onChange={(e) => handleRatingChange(startup.id, key, parseInt(e.target.value))}
+                                            />
+                                            <span>{ratings[startup.id]?.[key] || 5}</span>
+                                        </div>
+                                    </div>
+                                ))}
+                                <button className="btn-primary" onClick={() => submitRating(startup.id)}>Submit Rating</button>
                             </div>
                         </div>
                     ))}
+                    {filteredStartups.length === 0 && <p className="no-results">No projects found matching "{searchTerm}"</p>}
                 </div>
 
                 <section className="phase-details mt-3">

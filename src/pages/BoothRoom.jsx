@@ -30,7 +30,9 @@ function BoothRoom() {
                 <div className="booth-grid">
                     {companies.map(company => (
                         <div key={company.id} className="booth-card">
-                            <div className="booth-id">{company.location}</div>
+                            <div className="booth-header">
+                                <div className="booth-id">{company.location}</div>
+                            </div>
                             <h3>{company.name}</h3>
                             <p className="industry">{company.industry}</p>
                             <div className="opportunity-tag">

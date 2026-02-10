@@ -38,7 +38,8 @@ export function AuthProvider({ children }) {
     user,
     login,
     logout,
-    loading
+    loading,
+    isAdmin: user && (import.meta.env.VITE_ADMIN_EMAILS || '').split(',').includes(user.email)
   };
 
   return (
