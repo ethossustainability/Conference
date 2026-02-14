@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import Navigation from '../components/Navigation';
 import Notes from '../components/Notes';
 import './Auditorium.css';
+import { filterMessage, checkRateLimit } from '../utils/security';
 
 function Auditorium() {
     // Mock data for current event
@@ -16,6 +17,7 @@ function Auditorium() {
 
     const [messages, setMessages] = useState([]);
     const [newMessage, setNewMessage] = useState('');
+    const [error, setError] = useState('');
 
     // Load sent messages from localStorage
     useEffect(() => {
@@ -28,10 +30,19 @@ function Auditorium() {
     const handleSendMessage = (e) => {
         e.preventDefault();
         if (!newMessage.trim()) return;
+        setError('');
+
+        // Rate limit check (e.g., 5 messages per 30s)
+        if (!checkRateLimit('currentUser', 'auditorium_chat', 5, 30000)) {
+            setError('You are sending messages too fast. Please wait a moment.');
+            return;
+        }
+
+        const filteredText = filterMessage(newMessage);
 
         const message = {
             id: Date.now(),
-            text: newMessage,
+            text: filteredText,
             timestamp: new Date().toISOString(),
             sender: 'user' // In a real app, use user ID
         };
@@ -87,14 +98,25 @@ function Auditorium() {
                             ) : (
                                 <div className="messages-list">
                                     {messages.map((msg) => (
-                                        <div key={msg.id} className="message-bubble sent">
-                                            <p>{msg.text}</p>
-                                            <span className="timestamp">{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                        <div key={msg.id} className="message-container">
+                                            <div className="message-bubble sent">
+                                                <p>{msg.text}</p>
+                                                <span className="timestamp">{new Date(msg.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                            </div>
+                                            {msg.reply && (
+                                                <div className="message-bubble received admin-reply">
+                                                    <div className="reply-label">Host Reply</div>
+                                                    <p>{msg.reply}</p>
+                                                    <span className="timestamp">{new Date(msg.repliedAt).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                                                </div>
+                                            )}
                                         </div>
                                     ))}
                                 </div>
                             )}
                         </div>
+
+                        {error && <p className="chat-error" style={{ color: '#d32f2f', fontSize: '0.85rem', padding: '0 20px', margin: '10px 0 0' }}>{error}</p>}
 
                         <form onSubmit={handleSendMessage} className="qa-input-area">
                             <input

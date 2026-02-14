@@ -8,6 +8,10 @@ function Dashboard() {
   const { user } = useAuth();
   const savedCards = JSON.parse(localStorage.getItem('collected_cards') || '[]');
 
+  // Booth Wallet Progress
+  const boothProgress = JSON.parse(localStorage.getItem('booth_progress') || '{}');
+  const totalBooths = 10; // This should ideally come from a config or API
+
   const quickActions = [
     {
       title: 'Create/Edit Card',
@@ -66,6 +70,32 @@ function Dashboard() {
           <div className="stat-card">
             <div className="stat-value">{savedCards.length}</div>
             <div className="stat-label">Cards Collected</div>
+          </div>
+        </div>
+
+        <div className="booth-wallet-section">
+          <h2>Booth Wallet & Passport</h2>
+          <p className="wallet-description">Scan QR codes at booths and posters to register your visit. Collect them all for a surprise!</p>
+
+          <div className="passport-container">
+            <div className="passport-group">
+              <div className="group-header">
+                <h3>Booths & Posters</h3>
+                <span className="progress-count">{Object.keys(boothProgress).length} / {totalBooths}</span>
+              </div>
+              <div className="progress-bar-bg">
+                <div
+                  className="progress-bar-fill"
+                  style={{ width: `${(Object.keys(boothProgress).length / totalBooths) * 100}%` }}
+                ></div>
+              </div>
+            </div>
+
+            {Object.keys(boothProgress).length === totalBooths && (
+              <div className="raffle-notice animate-bounce">
+                🎉 Passport Complete! Your business card has been entered into the raffle.
+              </div>
+            )}
           </div>
         </div>
       </div>

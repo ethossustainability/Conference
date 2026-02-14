@@ -105,3 +105,91 @@
   font-size: 14px;
   color: var(--text-secondary);
 }
+
+.booth-wallet-section {
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--surface);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+}
+
+.booth-wallet-section h2 {
+  font-size: 20px;
+  margin-bottom: 8px;
+  color: var(--text-primary);
+}
+
+.wallet-description {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+
+.passport-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.passport-group h3 {
+  font-size: 16px;
+  margin-bottom: 12px;
+  color: var(--text-primary);
+}
+
+.group-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.progress-count {
+  font-size: 14px;
+  font-weight: bold;
+  color: var(--primary-color);
+}
+
+.progress-bar-bg {
+  height: 12px;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.progress-bar-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #FCBD9D 0%, #7D6F63 100%);
+  border-radius: 6px;
+  transition: width 0.5s ease-out;
+}
+
+.raffle-notice {
+  margin-top: 16px;
+  padding: 16px;
+  background: rgba(52, 168, 83, 0.1);
+  border: 1px solid #34a853;
+  border-radius: 8px;
+  color: #1b5e20;
+  font-weight: 500;
+  text-align: center;
+  font-size: 14px;
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.animate-bounce {
+  animation: bounce 2s infinite;
+}

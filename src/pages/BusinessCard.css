@@ -46,6 +46,21 @@
   border-radius: 4px;
 }
 
+.instruction-text {
+  font-size: 13px;
+  color: #7D6F63;
+  font-style: italic;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+
+.resume-group {
+  padding: 15px;
+  background: rgba(252, 189, 157, 0.1);
+  border-radius: 8px;
+  border: 1px dashed #FCBD9D;
+}
+
 .qr-display {
   display: flex;
   flex-direction: column;

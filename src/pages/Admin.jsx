@@ -142,10 +142,75 @@ function LiveQuestions() {
                         <span className="q-user" style={{ fontWeight: 'bold' }}>{q.user || 'Anonymous'}</span>
                         <span className="q-time">{new Date(q.timestamp).toLocaleTimeString()}</span>
                     </div>
-                    <p className="q-text" style={{ margin: 0, fontSize: '1rem' }}>{q.text}</p>
+                    <p className="q-text" style={{ margin: '10px 0', fontSize: '1.1rem', fontWeight: '500' }}>{q.text}</p>
+
+                    <div className="admin-reply-box" style={{ marginTop: '15px', borderTop: '1px solid #eee', paddingTop: '10px' }}>
+                        {q.reply ? (
+                            <div className="existing-reply" style={{ background: '#e3f2fd', padding: '10px', borderRadius: '4px', fontSize: '0.9rem' }}>
+                                <strong>Admin Reply:</strong> {q.reply}
+                            </div>
+                        ) : (
+                            <AdminReplyForm questionId={q.id} />
+                        )}
+                    </div>
                 </div>
             ))}
         </div>
+    );
+}
+
+function AdminReplyForm({ questionId }) {
+    const [replyText, setReplyText] = useState('');
+    const [isSending, setIsSending] = useState(false);
+
+    const handleReply = (e) => {
+        e.preventDefault();
+        if (!replyText.trim()) return;
+        setIsSending(true);
+
+        const allQuestions = JSON.parse(localStorage.getItem('admin_inbox_questions') || '[]');
+        const updatedQuestions = allQuestions.map(q => {
+            if (q.id === questionId) {
+                return { ...q, reply: replyText, repliedAt: new Date().toISOString() };
+            }
+            return q;
+        });
+
+        localStorage.setItem('admin_inbox_questions', JSON.stringify(updatedQuestions));
+
+        // Also update the user's local message history (simulated)
+        // In a real app, this would be handled by the backend
+        const userMessages = JSON.parse(localStorage.getItem('auditorium_user_messages') || '[]');
+        const updatedUserMessages = userMessages.map(m => {
+            if (m.id === questionId) {
+                return { ...m, reply: replyText, repliedAt: new Date().toISOString() };
+            }
+            return m;
+        });
+        localStorage.setItem('auditorium_user_messages', JSON.stringify(updatedUserMessages));
+
+        setReplyText('');
+        setIsSending(false);
+        window.location.reload(); // Refresh to show the reply (simple state sync)
+    };
+
+    return (
+        <form onSubmit={handleReply} style={{ display: 'flex', gap: '10px' }}>
+            <input
+                type="text"
+                value={replyText}
+                onChange={(e) => setReplyText(e.target.value)}
+                placeholder="Write a reply..."
+                style={{ flex: 1, padding: '8px', borderRadius: '4px', border: '1px solid #ccc' }}
+            />
+            <button
+                type="submit"
+                disabled={isSending || !replyText.trim()}
+                style={{ background: '#28a745', color: 'white', border: 'none', padding: '8px 15px', borderRadius: '4px', cursor: 'pointer' }}
+            >
+                Reply
+            </button>
+        </form>
     );
 }
 

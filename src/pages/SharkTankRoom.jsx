@@ -34,7 +34,20 @@ function SharkTankRoom() {
     const submitRating = (startupId) => {
         // Here you would typically send the data to a backend
         console.log(`Submitted rating for ${startupId}:`, ratings[startupId]);
-        alert('Thank you for your feedback!');
+
+        // Grant progress credit for voting
+        const startup = startups.find(s => s.id === startupId);
+        if (startup) {
+            const progress = JSON.parse(localStorage.getItem('booth_progress') || '{}');
+            progress[`pitch_${startupId}`] = {
+                name: startup.name,
+                type: 'pitch',
+                timestamp: new Date().toISOString()
+            };
+            localStorage.setItem('booth_progress', JSON.stringify(progress));
+        }
+
+        alert('Thank you for your feedback! This visit has been registered in your Booth Wallet.');
     };
 
     const ratingQuestions = [
@@ -48,7 +61,7 @@ function SharkTankRoom() {
         <div className="room-page">
             <div className="room-header">
                 <Link to="/" className="back-button">← Back to Home</Link>
-                <h1>Pitch Room (Shark Tank)</h1>
+                <h1>Pitch Room</h1>
             </div>
 
             <div className="room-content">

@@ -62,44 +62,51 @@ function ScanCard() {
     setScanning(false);
   };
 
+  const [isBoothScan, setIsBoothScan] = useState(false);
+
   const handleScannedData = (data) => {
     try {
-      // Try to parse as JSON first (if it's our card format)
-      let cardData;
+      // Try to parse as JSON
+      let parsedData;
       try {
-        cardData = JSON.parse(data);
+        parsedData = JSON.parse(data);
       } catch {
-        // If not JSON, try to parse URL with data parameter
+        // Try URL parsing for legacy card format
         const url = new URL(data);
         const dataParam = url.searchParams.get('data');
         if (dataParam) {
-          cardData = JSON.parse(decodeURIComponent(dataParam));
+          parsedData = JSON.parse(decodeURIComponent(dataParam));
         } else {
-          throw new Error('Invalid QR code format');
+          throw new Error('Invalid QR code');
         }
       }
 
-      // Check if it's a valid card
-      if (cardData.name && cardData.email) {
-        saveCard(cardData);
-        setScannedData(cardData);
+      // Handle Booth/Poster Scan
+      if (parsedData.type === 'booth' || parsedData.type === 'poster') {
+        registerBoothVisit(parsedData);
+        setIsBoothScan(true);
+        setScannedData(parsedData);
+        return;
+      }
+
+      // Handle Business Card Scan
+      if (parsedData.name && parsedData.email) {
+        saveCard(parsedData);
+        setIsBoothScan(false);
+        setScannedData(parsedData);
       } else {
-        throw new Error('Invalid business card data');
+        throw new Error('Invalid data format');
       }
     } catch (err) {
-      setError('Could not read business card. Please try scanning again.');
-      console.error('Error parsing scanned data:', err);
+      setError('Could not read QR code. Please try again.');
     }
   };
 
   const saveCard = (cardData) => {
     const savedCards = JSON.parse(localStorage.getItem('collected_cards') || '[]');
-
-    // Check if card already exists
     const exists = savedCards.some(card =>
       card.email === cardData.email && card.userId === cardData.userId
     );
-
     if (!exists) {
       cardData.collectedAt = new Date().toISOString();
       savedCards.push(cardData);
@@ -107,9 +114,19 @@ function ScanCard() {
     }
   };
 
+  const registerBoothVisit = (boothData) => {
+    const progress = JSON.parse(localStorage.getItem('booth_progress') || '{}');
+    progress[boothData.id] = {
+      name: boothData.name,
+      timestamp: new Date().toISOString()
+    };
+    localStorage.setItem('booth_progress', JSON.stringify(progress));
+  };
+
   const handleSaveAndContinue = () => {
     setScannedData(null);
     setError(null);
+    setIsBoothScan(false);
   };
 
   return (
@@ -169,58 +186,66 @@ function ScanCard() {
             <div className="card success-message">
               <div className="success-header">
                 <span className="success-icon">✓</span>
-                <h2>Card Saved Successfully!</h2>
+                <h2>{isBoothScan ? 'Visit Registered!' : 'Card Saved Successfully!'}</h2>
               </div>
 
-              <div className="scanned-card-preview">
-                <div className="preview-header">
-                  {scannedData.picture && (
-                    <img src={scannedData.picture} alt={scannedData.name} className="preview-avatar" />
-                  )}
-                  <div className="preview-name-section">
-                    <h3>{scannedData.name}</h3>
-                    {scannedData.title && <p className="preview-title">{scannedData.title}</p>}
-                    {scannedData.company && <p className="preview-company">{scannedData.company}</p>}
+              {isBoothScan ? (
+                <div className="booth-success-detail">
+                  <p>You have successfully registered your visit to:</p>
+                  <h3>{scannedData.name}</h3>
+                  <div className="booth-badge">Passport Updated</div>
+                </div>
+              ) : (
+                <div className="scanned-card-preview">
+                  <div className="preview-header">
+                    {scannedData.picture && (
+                      <img src={scannedData.picture} alt={scannedData.name} className="preview-avatar" />
+                    )}
+                    <div className="preview-name-section">
+                      <h3>{scannedData.name}</h3>
+                      {scannedData.title && <p className="preview-title">{scannedData.title}</p>}
+                      {scannedData.company && <p className="preview-company">{scannedData.company}</p>}
+                    </div>
+                  </div>
+
+                  <div className="scanned-card-details">
+                    {scannedData.email && (
+                      <div className="detail-row">
+                        <span className="detail-label">Email:</span>
+                        <a href={`mailto:${scannedData.email}`}>{scannedData.email}</a>
+                      </div>
+                    )}
+                    {scannedData.phone && (
+                      <div className="detail-row">
+                        <span className="detail-label">Phone:</span>
+                        <a href={`tel:${scannedData.phone}`}>{scannedData.phone}</a>
+                      </div>
+                    )}
+                    {scannedData.linkedin && (
+                      <div className="detail-row">
+                        <span className="detail-label">LinkedIn:</span>
+                        <a href={scannedData.linkedin} target="_blank" rel="noopener noreferrer">View Profile</a>
+                      </div>
+                    )}
+                    {scannedData.website && (
+                      <div className="detail-row">
+                        <span className="detail-label">Website:</span>
+                        <a href={scannedData.website} target="_blank" rel="noopener noreferrer">Visit</a>
+                      </div>
+                    )}
+                    {scannedData.bio && (
+                      <div className="detail-row bio-row">
+                        <span className="detail-label">Bio:</span>
+                        <p>{scannedData.bio}</p>
+                      </div>
+                    )}
                   </div>
                 </div>
-
-                <div className="scanned-card-details">
-                  {scannedData.email && (
-                    <div className="detail-row">
-                      <span className="detail-label">Email:</span>
-                      <a href={`mailto:${scannedData.email}`}>{scannedData.email}</a>
-                    </div>
-                  )}
-                  {scannedData.phone && (
-                    <div className="detail-row">
-                      <span className="detail-label">Phone:</span>
-                      <a href={`tel:${scannedData.phone}`}>{scannedData.phone}</a>
-                    </div>
-                  )}
-                  {scannedData.linkedin && (
-                    <div className="detail-row">
-                      <span className="detail-label">LinkedIn:</span>
-                      <a href={scannedData.linkedin} target="_blank" rel="noopener noreferrer">View Profile</a>
-                    </div>
-                  )}
-                  {scannedData.website && (
-                    <div className="detail-row">
-                      <span className="detail-label">Website:</span>
-                      <a href={scannedData.website} target="_blank" rel="noopener noreferrer">Visit</a>
-                    </div>
-                  )}
-                  {scannedData.bio && (
-                    <div className="detail-row bio-row">
-                      <span className="detail-label">Bio:</span>
-                      <p>{scannedData.bio}</p>
-                    </div>
-                  )}
-                </div>
-              </div>
+              )}
 
               <div className="scanned-card-actions">
                 <button onClick={handleSaveAndContinue} className="btn-primary" style={{ width: '100%' }}>
-                  Scan Another Card
+                  {isBoothScan ? 'Ready for Next Scan' : 'Scan Another Card'}
                 </button>
               </div>
             </div>

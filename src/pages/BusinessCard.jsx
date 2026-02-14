@@ -15,6 +15,7 @@ function BusinessCard() {
     phone: '',
     linkedin: '',
     website: '',
+    resume: '',
     bio: '',
   });
   const [showQR, setShowQR] = useState(false);
@@ -150,6 +151,20 @@ function BusinessCard() {
                 />
               </div>
 
+              <div className="form-group resume-group">
+                <label>Resume Link (Published URL) 📄</label>
+                <div className="instruction-text">
+                  Make sure your resume is ready as a shared/published link (e.g., Google Drive, Dropbox, or personal site).
+                </div>
+                <input
+                  type="url"
+                  name="resume"
+                  value={cardData.resume}
+                  onChange={handleChange}
+                  placeholder="https://drive.google.com/..."
+                />
+              </div>
+
               <div className="form-group">
                 <label>Bio</label>
                 <textarea
@@ -257,6 +272,12 @@ function BusinessCard() {
                   <div className="preview-contact-item">
                     <span>🌐</span>
                     <a href={cardData.website} target="_blank" rel="noopener noreferrer">Website</a>
+                  </div>
+                )}
+                {cardData.resume && (
+                  <div className="preview-contact-item">
+                    <span>📄</span>
+                    <a href={cardData.resume} target="_blank" rel="noopener noreferrer">Resume</a>
                   </div>
                 )}
               </div>

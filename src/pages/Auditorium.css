@@ -155,6 +155,36 @@
     border-bottom-right-radius: 2px;
 }
 
+.message-bubble.received {
+    align-self: flex-start;
+    background-color: #f1f0f0;
+    color: #333;
+    border-bottom-left-radius: 2px;
+}
+
+.admin-reply {
+    background-color: #e8f5e9 !important;
+    color: #2e7d32 !important;
+    border-left: 4px solid #4caf50;
+    margin-top: -10px;
+    margin-left: 20px;
+    z-index: 1;
+}
+
+.reply-label {
+    font-size: 0.7rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    opacity: 0.8;
+}
+
+.message-container {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
 .timestamp {
     display: block;
     font-size: 0.7rem;
